@@ -1,0 +1,133 @@
+\documentclass[]{article}
+\usepackage{amsmath, amsfonts}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{float}
+
+%opening
+\title{Problem Set II \\ \large Microeconomics II}
+\author{Nurfatima Jandarova}
+\date{\today}
+\pagestyle{fancy}
+
+\lhead{Microeconomics II, Problem Set II}
+\rhead{Nurfatima Jandarova}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyheadoffset{1 cm}
+
+\geometry{a4paper, left=20mm, top=20mm, bottom = 20mm, headheight=20mm}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\renewcommand{\arraystretch}{1.3}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Exercise 1}
+\begin{enumerate}
+	\item From the definition of dominated strategy, we know that if $s_i$ is dominated, then $\exists\hat{\sigma}_i\in\Sigma_i$ such that $\pi_i(\hat{\sigma}_i, s_{-i}) > \pi_i(s_i, s_{-i}), \forall s_{-i}\in S_{-i}$.\\
+	Want to show that $\forall\sigma_i\in\Sigma_i$ such that $\sigma_i(s_i)>0, \exists\tilde{\sigma}_i\in\Sigma_i$ such that $\pi_i(\tilde{\sigma}_i, s_{-i}) > \pi_i(\sigma_i, s_{-i}), \forall s_{-i}\in S_{-i}$.\\
+	Without loss of generality, denote $\sigma_i$ such that $\pi_i(\sigma_i, s_{-i}) = (1-\alpha)\pi_i(\hat{\sigma}_i, s_{-i}) + \alpha\pi_i(s_i, s_{-i}), \forall\alpha\in(0, 1]$, i.e., it represent a lottery over $\hat{\sigma}_i$ and $s_i$. Take $\tilde{\sigma}_i = \hat{\sigma}_i$. Then,
+	\begin{equation}
+		\begin{split}
+		\pi(\hat{\sigma}_i, s_{-i}) = (1-\alpha)\pi_i(\hat{\sigma}_i, s_{-i}) + \alpha\pi_i(\hat{\sigma}_i, s_{-i}) > (1-\alpha)\pi_i(\hat{\sigma}_i, s_{-i}) + \alpha\pi_i(s_i, s_{-i}) = \pi_i(\sigma_i, s_{-i}), \forall s_{-i}\in S_{-i}\nonumber
+		\end{split}
+	\end{equation}
+	Therefore, we conclude that $\forall\sigma_i\in\Sigma_i$ such that $\sigma_i(s_i)>0, \pi_i(\hat{\sigma}_i, s_{-i}) > \pi_i(\sigma_i, s_{-i}), \forall s_{-i}\in S_{-i}$.\\
+	However, the converse is not true. Consider the following game (here, the payoffs of the second player are irrelevant to us):
+	\begin{table}[H]
+		\centering
+		\label{my-label}
+		\begin{tabular}{ll|ll}
+			\multicolumn{2}{l}{\multirow{2}{*}{}} & \multicolumn{2}{l}{Player 2} \\
+			\multicolumn{2}{l}{} & X & Y \\ \hline
+			\multirow{3}{*}{\rotatebox[origin=c]{90}{Player 1}} & U & (3, *) & (3, *) \\
+			& M & (4, *) & (0, *) \\
+			& D & (0, *) & (4, *)           
+		\end{tabular}
+	\end{table}
+	Consider the mixed strategy of player 1 $\sigma_1 = (\Pr(U), \Pr(M), \Pr(D)) = (0, \frac{1}{2}, \frac{1}{2})$ against the pure pure strategy $U$.
+	\begin{equation}
+		\begin{split}
+		\pi_1(\sigma_1, X)& = 0\cdot3 + \frac{1}{2}4 + \frac{1}{2}0 = 2 < 3 = \pi_1(U, X) \\ \nonumber
+		\pi_1(\sigma_1, Y)& = 0\cdot3 + \frac{1}{2}0 + \frac{1}{2}4 = 2 < 3 = \pi_1(U, Y)
+		\end{split}
+	\end{equation}
+	That is, a mixed strategy $\sigma_1$ is dominated by a pure strategy $U$. However, neither $M$ nor $D$, to which $\sigma_1$ assigns positive probability, is dominated by the other. Consider $\tilde{\sigma}_1 = (\Pr(M), \Pr(D)) = (p, 1-p)$. Then,
+	\begin{equation}
+		\begin{split}
+		\pi_1(\tilde{\sigma}_1, X)& = 4p + 0(1-p) = 4p < 4 = \pi_1(M, X) \\ \nonumber
+		\pi_1(\tilde{\sigma}_1, Y)& = 0p + 4(1-p) = 4(1-p) < 4 = \pi_1(D, Y) \\
+		\end{split}
+	\end{equation}
+	So, from the above we infer that $\not\exists\tilde{\sigma}_1\in\Sigma_1$ such that $\pi_1(\tilde{\sigma}_1, s_{-i}) > \pi_1(s_i, s_{-i}), \forall s_{-i}\in S_{-i}$, where $s_i = \{M, D\}$.
+	
+	\item We have a strictly dominated strategy $s_i\in S_i$, i.e., $\exists\sigma_i\in\Sigma_i$ such that $\pi_i(\sigma_i, s_{-i}) > \pi_i(s_i, s_{-i}), \forall s_{-i}\in S_{-i}$. Observe that we also could rewrite
+	\begin{equation}
+		\pi_i(\sigma_i, \sigma_{-i}) = \sum\limits_{s_{-i}\in S_{-i}}\pi_i(\sigma_i, s_{-i})\prod\limits_{j\neq i}\sigma_j(s_j) > \sum\limits_{s_{-i}\in S_{-i}}\pi_i(s_i, s_{-i})\prod\limits_{j\neq i}\sigma_j(s_j) = \pi_i(s_i, \sigma_{-i}), \forall \sigma_{-i}\in\Sigma_{-i} \nonumber
+	\end{equation}
+	Hence, strategy $s_i$ is strictly dominated for all mixed strategies of other players. Therefore, the two definitions of strict domination are equivalent.
+\end{enumerate}
+
+\subsection*{Exercise 2}
+
+\begin{enumerate}
+	\item First, I assume the exercise was borrowed from Vega-Redondo (Ex. 2.2.a) and thus, we are in a setup of finite games, i.e., games with finite number of players and finite strategy spaces.\\
+	Proof by contradiction. Suppose otherwise, i.e., the iterative elimination continues infinitely. This means that $\forall q\geq0: \exists s_i\in S_i^q$ and $\exists\sigma_i\in\Sigma_i^q$ such that $\pi_i(\sigma_i, s_{-i}) > \pi_i(s_i, s_{-i})$. That is, at every iteration there is at least one strictly dominated strategy. Since we assumed that iterative elimination continues for infinitely many steps, there must be infinitely many strictly dominated strategies. But this contradicts the assumption that we have a finite set of strategies. Therefore, in a finite game the iterative elimination finishes in a finite number of steps.
+	\item \begin{enumerate}[label=\alph*)]
+		\item Denote a set of strictly dominated strategies of player $i$ at step $q$ as
+		\begin{equation}
+			X_i^q = \{s_i\in S_i^q: \exists\sigma_i\in\Sigma_i^q \text{ such that }\pi_i(\sigma_i, s_{-i}) > \pi_i(s_i, s_{-i}), \forall s_{-i}\in S_{-i}\} \nonumber
+		\end{equation}
+		As shown in Exercise 1, any mixed strategy that assigns positive probability to the strictly dominated strategy is itself dominated. Hence, $\exists\hat{\sigma}_i, \sigma_i\in\Sigma_i^q$ such that $\hat{\sigma}_i(s_i) = 0, \forall s_i\in X_i^q$ and $\pi_i(\hat{\sigma}_i, s_{-i}) > \pi_i(\sigma_i, s_{-i}) > \pi_i(s_i, s_{-i}), \forall s_{-i}\in S_{-i}$. Notice now that once a strategy $s_i^q$ was eliminated at step $q$, the set $X_i^{q+1} = X_i^q/\{s_i^q\}$. Observe that a mixed strategy $\hat{\sigma}_i$ is available at stage $q+j, \forall j\geq1$ because $\sup(\hat{\sigma}_i)\subseteq S_i^q/X_i^q$. Therefore, the remaining elements of $X_i^q$ could still be eliminated at later stages, no matter which strategy was eliminated first at step $q$.
+	\item From Exercise 2. a) we know that order of elimination does not matter. Hence, whenever at any step we are in a situation that some player $i$ has multiple strictly dominated strategies, we could fix the player and continue with iterative elimination described in this problem until all his strictly dominated strategies are eliminated. Once done this, we could move on to a next player and repeat the same. This implies that the procedure of iterative elimination presented in the class and in this problem are equivalent. Hence, the limit outcome of both procedures are the same.
+	\end{enumerate}
+\end{enumerate}
+
+\subsection*{Exercise 3}
+
+Here, using only the notion of common rationality is not enough to provide a solution for the game as there are no strictly dominated strategies to be eliminated. However, imposing an additional assumption of "correct beliefs" allows us to search for Nash equilibrium using best response correspondences. Denote the probability of player 1 choosing action X by $p$ and the probability of player 2 choosing A by $q$. Correspondingly, probability of player 1 choosing Y is $1-p$ and of player 2 choosing B is $1-q$. Then, the payoff of two players could be written as follows:
+\begin{equation}
+	\begin{split}
+	\pi_1(p, q)& = q(100p + 99(1-p)) + (1-q)(-1000p+1000(1-p)) \\ \nonumber
+	& = q(99+p) + (1-q)1000(1-2p) \\
+	\pi_2(p, q)& = p(2q + 2(1-q)) + (1-p)(3q + 2(1-q)) \\
+	& = 2p + (1-p)(2+q) = 2p + 2 - 2p + q - pq = 2 + q(1-p) \\
+	\Longrightarrow \rho_1(q)& =\arg\max\limits_{p}\pi_1(p, q) = \begin{cases}
+	1\text{ if }q>\frac{1}{2} \\
+	0\text{ if }q\leq\frac{1}{2}
+	\end{cases}\text{ and }
+	\rho_2(p) = \arg\max\limits_{q}\pi_2(p, q) = 1, \forall p\in[0, 1]
+	\end{split}
+\end{equation}
+From the above it is clear that the two best response correspondences intersect only at the point $p = q = 1$. Therefore, Nash equilibrium of this game would be $s^* = s_1^*\times s_2^* = (X, A)$.
+
+\subsection*{Exercise 4}
+Since the game is dominance-solvable, we have $S^\infty = \{\{\hat{s}_i\}_{i = 1}^{N}\}$, where $\#(S_i^\infty) = 1, \forall i\in\{1, \ldots, N\}$. Denote Nash equilibrium of the game as $S^* = \{\{s_i^*\}_{i = 1}^{N}\}$. Notice that if we show that the two sets are equal, unicity of Nash equilibrium follows from the fact that each $S_i^\infty$ is a singleton.
+
+First, let's show that Nash equilibrium survives IESDS. Suppose otherwise, i.e., there exists player $j$ whose strategy $s_j^*$ was eliminated at some stage $q$, while other players' Nash equilibrium strategies were not eliminated. This means that $\exists s_j'\in S_j^q$ such that $\pi_j(s_j', s_{-j}) > \pi_j(s_j^*, s_{-j}), \forall s_{-j}\in S_{-j}$, including $s_{-j}^*\in S_{-j}$. Then, $\pi_j(s_j', s_{-j}^*) > \pi_j(s_j^*, s_{-j}^*)$, which contradicts the assumption that $s_j^*$ is a Nash equilibrium of player $j$. Therefore, it must be that $S^*$ survives IESDS.
+
+Second, want to show that $S^\infty$ is a Nash equilibrium. Again, proof by contradiction. Suppose not, i.e., for some $i, \hat{s}_i$ is not Nash equilibrium. It means that $\exists s_i\in S_i$ such that
+\begin{equation}\label{ineq1}
+	\pi_i(\hat{s}_i, s_{-i}^*) < \pi_i(s_i, s_{-i}^*)
+\end{equation}
+We also know that $\hat{s}_i$ is a sole survivor of IESDS, which implies that at some step of iteration $s_i$ is eliminated $\Longrightarrow\exists\tilde{s}_i\in S_{i}^q$ such that $\pi_i(\tilde{s}_i, s_{-i}) > \pi_i(s_i, s_{-i}), \forall s_{-i}\in S_{-i}^q$. Since we already know that Nash equilibrium strategies always survive IESDS,  the latter inequality also holds for all $s_{-i}^*\in S_{-i}^*$:
+\begin{equation}\label{ineq2}
+	\pi_i(\tilde{s}_i, s_{-i}^*) > \pi_i(s_i, s_{-i}^*)
+\end{equation}
+Combining the two inequalities \ref{ineq1} and \ref{ineq2} we get:
+\begin{equation}\label{ineqelim}
+	\pi_i(\hat{s}_i, s_{-i}^*) < \pi_i(s_i, s_{-i}^*) < \pi_i(\tilde{s}_i, s_{-i}^*)\nonumber
+\end{equation}
+If $\tilde{s}_i = \hat{s}_i$ we reach the contradiction. Otherwise, observe that we shall repeat the procedure until we eliminate all the strategies $s_i''$ such that $\pi_i(\hat{s}_i, s_{-i}^*) < \pi_i(s_i'', s_{-i}^*)$. With an abuse of notation, suppose that at some step $s_i''$  is the last such strategy. In order to rule this strategy out,  we must have some strategy $s_i'''$ that strictly dominates $s_i''$, and hence satisfies both \ref{ineq2} and \ref{ineqelim}. But this contradicts the assumption that $s_i''$ was the last strategy such that $\pi_i(\hat{s}_i, s_{-i}^*) < \pi_i(s_i'', s_{-i}^*)$. Therefore, it must be the case that $\hat{s}_i$ is Nash equilibrium.
+Summarizing, we proved that every Nash equilibrium survives IESDS, and if IESDS solution is a singleton, then it is a Nash equilibrium. And since IESDS solution is a singleton, it also implies that Nash equilibrium is unique.
+\end{document}

@@ -11,6 +11,7 @@
 \usepackage{pgfplots}	% To draw charts directly in Latex
 \usepackage{marvosym}	% For lightning symbol to denote contradiction
 \usepackage{cleveref}	% For clever referencing :)
+\usepackage{nameref}	% For referencing to the section name, not number
 
 %TikZ package for drawing:
 \usepackage{tikz}
@@ -318,6 +319,7 @@ First player has two information sets and his/her strategy space is $S_1 = \{A, 
 \end{enumerate}
 
 \subsubsection*{3.3}
+\label{ex3.3}
 
 The following game in extensive form (with imperfect recall) has the same strategic form representation as in \Cref{tab:ex3str}.
 
@@ -381,7 +383,7 @@ The following game in extensive form (with imperfect recall) has the same strate
 		% Players
 		% player 1
 		\node[align=left, xshift=-5]at(0){1};
-		\foreach \x in {1, 2} \foreach \y in {1, 2} \node[below,yshift=-2, xshift=-5]at(0-\x-\y){1}; 
+		\foreach \x in {1, 2} \foreach \y in {1, 2} \node[below, xshift=-3]at(0-\x-\y){1}; 
 		% player 2, turn 2
 		\foreach \x in {1, 2} \node[below]at(0-\x){2};
 		
@@ -391,6 +393,14 @@ The following game in extensive form (with imperfect recall) has the same strate
 		\node[right]at(0-1-2-2){$(-10, -2)$};
 		\node[right]at(0-2-1-2){$(-1, -2)$};
 		\node[right]at(0-2-2-2){$(2, -1)$};
+		
+		% Naming the nodes in the information sets
+		\node[above,xshift=6]at(0-2-2){$x_{31}$};
+		\node[above,xshift=6]at(0-2-1){$x_{32}$};
+		\node[above,xshift=6]at(0-1-2){$x_{33}$};
+		\node[above,xshift=6]at(0-1-1){$x_{34}$};
+		\node[above]at(0-2){$x_{21}$};
+		\node[above]at(0-1){$x_{22}$};
 		\end{tikzpicture}
 	\end{center}
 	\caption{Alternative extensive form game}
@@ -398,4 +408,30 @@ The following game in extensive form (with imperfect recall) has the same strate
 \end{figure}
 
 \subsubsection*{3.4}
+
+\begin{enumerate}[label=(\roman*)]
+	\item Since the game in \nameref{ex3.3} has the same strategic form representation as the original game, the set of Nash equilibria in pure strategies is the  same, $\{(A, C, a), (B, C, b), (B, D, b)\}$.
+	
+	\item The game in \nameref{ex3.3} has only one proper subgame: the entire game. Therefore, subgame perfection has no bite and the set of SGPE is the same as the set of NE, $\{(A, C, a), (B, C, b), (B, D, b)\}$. Unlike the original game, where subgame perfection ruled out strategy $(B, C, b)$.
+	
+	\item Let $\mu$ denote the probabilities player 1 assigns to being at each of the nodes in his second information set: $\mu = \{\mu(x_{31}), \mu(x_{32}), \mu(x_{33}), 1 - \mu(x_{31}) - \mu(x_{32}) - \mu(x_{33})\}$. Then,
+	\begin{equation}
+		\begin{split}
+			\pi_1(A; \mu)& = 2\mu(x_{31}) - \mu(x_{32}) - 10\mu(x_{33}) \\ \nonumber
+			\pi_1(B; \mu)& = \mu(x_{31}) + \mu(x_{32}) + \mu(x_{33}) + 1 - \mu(x_{31}) - \mu(x_{32}) - \mu(x_{33}) = 1
+		\end{split}
+	\end{equation}
+	For the first player to choose $A$ over $B$, the following condition must hold: $2\mu(x_{31}) - \mu(x_{32}) - 10\mu(x_{33}) > 1$. Given any belief system such that this condition holds, sequential rationality will imply that player 2 will choose $a$ at $x_{21}$ and $b$ at $x_{22}$. Then, in the beginning of the game, player 1 will play $C$. Notice, that in this game player 1 always arrives at his/her second information set. Then, a sequentially rational strategy $(A, C, a)$, implies that $P^\gamma(x_{31}) = 1$ and $P^\gamma(x_{32}) = P^\gamma(x_{33}) = P^\gamma(x_{34}) = 0$. Thus, a belief system should be $\mu = (1, 0, 0, 0)$ to be statistically consistent. This also satisfies the initial condition for $A$ to be preferred to $B$. Hence, a strategy profile $(A, C, a)$ and a belief system $\mu = (1, 0, 0, 0)$ is a WPBE.
+	
+	When $2\mu(x_{31}) - \mu(x_{32}) - 10\mu(x_{33}) < 1$, player 2 and 1 are indifferent between choosing $a$ or $b$, and $C$ or $D$, respectively. Furthermore, we know that WPBE $\subseteq$ NE\footnote{At first I thought that any of $\{(B, C, a), (B, C, b), (B, D, a), (B, D, b)\}$ will satisfy sequential rationality and that check for consistency will help to rule out $\{(B, C, a), (B, D, a)\}$. But I could only rule out $(B, C, a)$. And I am lost as to how either sequential rationality or consistency could help to rule out $(B, D, a)$ without imposing the relation between WPBE and NE.}. Therefore, any of the following pure strategies $\{(B, C, b), (B, D, b)\}$ satisfies sequential rationality given a belief system such that  $2\mu(x_{31}) - \mu(x_{32}) - 10\mu(x_{33}) < 1$. So, need to check consistency of beliefs for each of those pure strategies.
+	
+	Given a strategy profile $(B, C, b)$, $P^{(B, C, b)}(x_{31}) = P^{(B, C, b)}(x_{33}) = P^{(B, C, b)}(x_{34}) = 0, P^{(B, C, b)}(x_{32}) = 1$. This implies that $\mu(x_{31}) = \mu(x_{33}) = \mu(x_{34}) = 0, \mu(x_{32}) = 1$. Such belief system also satisfies the condition for $(B, C, b)$ to be sequentially rational. Hence, $(B, C, b)$ and the belief system $\mu = (0, 1, 0, 0)$ is a WPBE.
+	
+	Given a strategy profile $(B, D, b)$, $P^{(B, D, b)}(x_{31}) = P^{(B, D, b)}(x_{32}) = P^{(B, D, b)}(x_{33}) = 0, P^{(B, D, b)}(x_{34}) = 1$. This implies that $\mu(x_{31}) = \mu(x_{32}) = \mu(x_{33}) = 0, \mu(x_{34}) = 1$. Such belief system also satisfies the condition for $(B, D, b)$ to be sequentially rational. Hence, $(B, D, b)$ and the belief system $\mu = (0, 0, 0, 1)$ is a WPBE.
+	
+	Therefore, the set of WPBE is the same as the set of NE, $\{(A, C, a), (B, C, b), (B, D, b)\}$, unlike in the original game, where the set of WPBE was $\{(A, C, a), (B, D, b)\}$.
+\end{enumerate}
+
+\subsection*{Exercise 4}
+
 \end{document}

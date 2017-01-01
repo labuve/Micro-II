@@ -434,4 +434,67 @@ The following game in extensive form (with imperfect recall) has the same strate
 
 \subsection*{Exercise 4}
 
+\subsubsection*{4.1}
+Notice that player 1 only has to provide one vector, e.g., $y$, whereas the second vector is automatically determined as $z = (4 - y_a, 4 - y_b)$. The set of all possible choices of the vector $y$ could be written as $y = 4(\alpha, \beta) \Longrightarrow z = 4(1 - \alpha, 1 - \beta), \quad\forall\alpha\in[0, 1], \forall\beta\in[0, 1]$. Therefore, the strategy space of player 1 is $S_1 = \{(4(\alpha, \beta), 4 (1 - \alpha, 1 - \beta)), \forall\alpha\in[0, 1], \forall\beta\in[0, 1]\}$.
+
+Unlike player 1, actions available to player 2 are discrete and the strategy space of player 2 could be written as $S_2 = \{Y, Z\}^{\#(S_1)}$, where $Y$ stands for choosing vector $y$ and $Z$ stands for choosing proposed vector $z$, for all $(y,z)\in S_1$. 
+
+ \subsubsection*{4.2}
+Notice that player 2 chooses $Y$ if $\min(\alpha, \beta) > \min(1 - \alpha, 1 - \beta)$ and chooses $Z$ if $\min(\alpha, \beta) < \min(1 - \alpha, 1 - \beta)$. Taking this into account, player 1 has to choose $\alpha$ and $\beta$ to maximize his/her own utility. Consider the following cases
+\begin{enumerate}[label=\alph*)]
+	\item $\alpha < \beta$
+	Hence, $\min(\alpha,\beta) = \alpha$ and $\min(1 - \alpha, 1 - \beta) = 1 - \beta$.
+	\begin{itemize}
+		\item $\alpha < 1 - \beta$
+		In this case, player 2 chooses $Z$ and gets $4(1 - \beta)$. Therefore, player 1 gets $16\alpha\beta$.
+		\item $\alpha > 1 - \beta$
+		Here, player 2 chooses $Y$ and gets $4\alpha$. Thus, player 1 gets $16(1 - \alpha)(1 - \beta)$.
+		\item $\alpha = 1 - \beta$
+		In this case player 2 is indifferent between $Y$ and $Z$ as both of them yield utility of $4\alpha = 4(1 - \beta)$ and player 1 accordingly gets $16(1 - \alpha)(1 - \beta) = 16\alpha\beta$.
+	\end{itemize}
+	\item $\alpha > \beta$
+	Hence, $\min(\alpha,\beta) = \beta$ and $\min(1 - \alpha, 1 - \beta) = 1 - \alpha$.
+	\begin{itemize}
+		\item $\beta < 1 - \alpha \Longrightarrow \alpha < 1 - \beta$. As seen above, his implies that $\pi_1 = 16\alpha\beta$.
+		\item $\beta > 1 - \alpha \Longrightarrow \alpha > 1 - \beta \Longrightarrow \pi_1 = 16(1 - \alpha)(1 - \beta)$.
+		\item $\beta = 1 - \alpha \Longrightarrow \alpha = 1 - \beta \Longrightarrow \pi_1 = 16(1 - \alpha)(1 - \beta) = 16\alpha\beta$.
+	\end{itemize}
+	\item $\alpha = \beta$
+	Hence, $\min(\alpha,\beta) = \alpha = \beta$ and $\min(1 - \alpha, 1 - \beta) = 1 - \alpha = 1 - \beta$.
+	\begin{itemize}
+		\item $\alpha < 1 - \alpha$
+		In this case, player 2 chooses $Z$ and gets $4(1 - \alpha)$ and player 1 gets $16\alpha^2$.
+		\item $\alpha > 1 - \alpha$
+		Here, player 2 chooses $Y$ and gets $4\alpha$ and player 1 gets $16(1 - \alpha)^2$.
+		\item $\alpha = 1 - \alpha \Longrightarrow \alpha = \frac{1}{2}$.
+		Here, player 2 is indifferent between $Y$ and $Z$ and gets $2$. Player 1 gets payoff of $4$.
+	\end{itemize}
+\end{enumerate}
+
+Graphically, these cases could be represented in the chart below:
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	xlabel={$\alpha$}, ylabel={$\beta$}, zlabel={$\pi_1$},
+	ymajorgrids=false,
+	y dir=reverse,
+	]
+	
+	% Best response correspondence of player 1
+	\addplot3[surf, shader=interp, mesh/cols=3,opacity=0.5]
+	coordinates {(0,0,0) (0.5,0,0) (1,0,0)
+				(0,0.5,0) (0.5,0.5,4) (1,0.5,0)
+				(0,1,0) (0.5,1,0) (1,1,0)
+			};
+
+	\end{axis}
+	\end{tikzpicture}
+\end{figure}
+
+From the chart, it is straightforward that the best response of player 1 is to set $\alpha = \beta = \frac{1}{2}$. Therefore, the outcome of the game is $y = (2, 2); z = (2, 2)$ with $\pi_1 = 4$ and $\pi_2 = 2$. However, I can't give an explicit expression for SGPE in case where the set of pure strategies is infinite.
+
+\subsubsection*{4.3}
+
 \end{document}

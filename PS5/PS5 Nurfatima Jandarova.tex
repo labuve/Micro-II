@@ -38,6 +38,9 @@
 
 \renewcommand{\arraystretch}{1.3}
 
+% Define a checkmark
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
 \begin{document}
 
 \maketitle
@@ -321,7 +324,7 @@ First player has two information sets and his/her strategy space is $S_1 = \{A, 
 \subsubsection*{3.3}
 \label{ex3.3}
 
-The following game in extensive form (with imperfect recall) has the same strategic form representation as in \Cref{tab:ex3str}.
+Strategically equivalent simultaneous game in extensive form:
 
 \begin{figure}[h]
 	\begin{center}
@@ -332,75 +335,57 @@ The following game in extensive form (with imperfect recall) has the same strate
 		]
 		
 		% Two node styles: solid and hollow
-		\tikzstyle{solid node}=[circle,draw,inner sep=1.2,fill=black];
+		\tikzstyle{solid node}=[circle,draw,inner sep=1.2,fill=white];
 		\tikzstyle{end node}=[circle,draw,inner sep=1.2,fill=red];
 		\tikzstyle{hollow node}=[circle,draw,inner sep=1.2];
 		
 		% Specify spacing for each level of the tree
-		\tikzstyle{level 1}=[level distance=20mm,sibling distance=30mm]
-		\tikzstyle{level 2}=[level distance=15mm,sibling distance=15mm]
-		\tikzstyle{level 3}=[level distance=15mm,sibling distance=10mm]
+		\tikzstyle{level 1}=[level distance=25mm,sibling distance=15mm]
+		\tikzstyle{level 2}=[level distance=15mm,sibling distance=10mm]
 		% The Tree
-		\node(0)[solid node]{}
-		% Player 1 D
-		child{node[solid node]{}
+		\node(0)[hollow node]{}
+		% Player 1 BD
+		child{node[solid node]{$x_{24}$}
 			% Player 2
-			child{node[solid node]{}
-				% Player 1, A or B
-				child{node[end node] {} edge from parent node[below]{$B$}}
-				child{node[end node] {} edge from parent node[above]{$A$}}
-				edge from parent node[below]{$b$}
-			}
-			child{node[solid node]{} 
-				% Player 1, A or B
-				child{node[end node] {} edge from parent node[below]{$B$}}
-				child{node[end node] {} edge from parent node[above]{$A$}}
-				edge from parent node[above]{$a$}
-			}
-			edge from parent node[below]{$D$}
-		}
-		% Player 1 C
-		child{node[solid node]{}
+			child{node[end node]{} edge from parent node[below]{$b$}}
+			child{node[end node]{} edge from parent node[above]{$a$}}
+			edge from parent node[below]{$BD$}}
+		% Player 1 BC
+		child{node[solid node]{$x_{23}$}
 			% Player 2
-			child{node[solid node]{}
-				% Player 1, A or B
-				child{node[end node] {} edge from parent node[below]{$B$}}
-				child{node[end node] {} edge from parent node[above]{$A$}}
-				edge from parent node[below]{$b$}
-			}
-			child{node[solid node]{} 
-				% Player 1, A or B
-				child{node[end node] {} edge from parent node[below]{$B$}}
-				child{node[end node] {} edge from parent node[above]{$A$}}
-				edge from parent node[above]{$a$}
-			}
-			edge from parent node[above]{$C$}
-		};
+			child{node[end node]{} edge from parent node[below]{$b$}}
+			child{node[end node]{} edge from parent node[above]{$a$}}
+			edge from parent node[below]{$BC$}}
+		% Player 1 AD
+		child{node[solid node]{$x_{22}$}
+			% Player 2
+			child{node[end node]{} edge from parent node[below]{$b$}}
+			child{node[end node]{} edge from parent node[above]{$a$}}
+			edge from parent node[above]{$AD$}}
+		% Player 1 AC
+		child{node[solid node]{$x_{21}$}
+			% Player 2
+			child{node[end node]{} edge from parent node[below]{$b$}}
+			child{node[end node]{} edge from parent node[above]{$a$}}
+			edge from parent node[above]{$AC$}}
+		;
 		
 		% Information sets
-		\draw[dotted,very thick](0-1-1)to(0-2-2);
+		\draw[dotted,very thick](0-1)to(0-4);
 		
 		% Players
 		% player 1
 		\node[align=left, xshift=-5]at(0){1};
-		\foreach \x in {1, 2} \foreach \y in {1, 2} \node[below, xshift=-3]at(0-\x-\y){1}; 
-		% player 2, turn 2
-		\foreach \x in {1, 2} \node[below]at(0-\x){2};
+		% player 2
+		\foreach \x in {1, 2, 3, 4} \node[below, xshift=-11]at(0-\x){2};
 		
 		% Specifying payoffs
-		\foreach \x in {1, 2} \foreach \y in {1, 2} \node[right]at(0-\x-\y-1){$(1, 1)$};
-		\node[right]at(0-1-1-2){$(0, -1)$};
-		\node[right]at(0-1-2-2){$(-10, -2)$};
-		\node[right]at(0-2-1-2){$(-1, -2)$};
-		\node[right]at(0-2-2-2){$(2, -1)$};
+		\node[right]at(0-4-2){$(2, -1)$};
+		\node[right]at(0-4-1){$(-1, -2)$};
+		\node[right]at(0-3-2){$(-10, -2)$};
+		\node[right]at(0-3-1){$(0, -1)$};
+		\foreach\x in {1, 2} \foreach\y in {1, 2} \node[right]at(0-\x-\y){$(1, 1)$};
 		
-		% Naming the nodes in the information sets
-		\node[above,xshift=6]at(0-2-2){$x_{31}$};
-		\node[above,xshift=6]at(0-2-1){$x_{32}$};
-		\node[above,xshift=6]at(0-1-2){$x_{33}$};
-		\node[above,xshift=6]at(0-1-1){$x_{34}$};
-		\node[above]at(0-2){$x_{21}$};
-		\node[above]at(0-1){$x_{22}$};
 		\end{tikzpicture}
 	\end{center}
 	\caption{Alternative extensive form game}
@@ -410,26 +395,24 @@ The following game in extensive form (with imperfect recall) has the same strate
 \subsubsection*{3.4}
 
 \begin{enumerate}[label=(\roman*)]
-	\item Since the game in \nameref{ex3.3} has the same strategic form representation as the original game, the set of Nash equilibria in pure strategies is the  same, $\{(A, C, a), (B, C, b), (B, D, b)\}$.
+	\item Since the game in \nameref{ex3.3} has the same strategic form representation as the original game, the set of Nash equilibria in pure strategies is the  same, $\{(AC, a), (BC, b), (BD, b)\}$.
 	
-	\item The game in \nameref{ex3.3} has only one proper subgame: the entire game. Therefore, subgame perfection has no bite and the set of SGPE is the same as the set of NE, $\{(A, C, a), (B, C, b), (B, D, b)\}$. Unlike the original game, where subgame perfection ruled out strategy $(B, C, b)$.
+	\item The game in \nameref{ex3.3} has only one proper subgame: the entire game. Therefore, subgame perfection has no bite and the set of SGPE is the same as the set of NE, $\{(AC, a), (BC, b), (BD, b)\}$. Unlike the original game, where subgame perfection ruled out strategy $(BC, b)$.
 	
-	\item Let $\mu$ denote the probabilities player 1 assigns to being at each of the nodes in his second information set: $\mu = \{\mu(x_{31}), \mu(x_{32}), \mu(x_{33}), 1 - \mu(x_{31}) - \mu(x_{32}) - \mu(x_{33})\}$. Then,
+	\item Let $\mu$ denote the probabilities player 2 assigns to being at each of the nodes in his information set: $\mu = \{\mu(x_{21}), \mu(x_{22}), \mu(x_{23}), 1 - \mu(x_{21}) - \mu(x_{22}) - \mu(x_{23})\}$. Then,
 	\begin{equation}
 		\begin{split}
-			\pi_1(A; \mu)& = 2\mu(x_{31}) - \mu(x_{32}) - 10\mu(x_{33}) \\ \nonumber
-			\pi_1(B; \mu)& = \mu(x_{31}) + \mu(x_{32}) + \mu(x_{33}) + 1 - \mu(x_{31}) - \mu(x_{32}) - \mu(x_{33}) = 1
+			\pi_2(a; \mu)& = -\mu(x_{21}) - 2\mu(x_{22}) + \mu(x_{23}) +  1 - \mu(x_{21}) - \mu(x_{22}) - \mu(x_{23}) = 1 - 2\mu(x_{21}) - 3\mu(x_{22})\\ \nonumber
+			\pi_2(b; \mu)& = -2\mu(x_{21}) - \mu(x_{22}) + \mu(x_{23}) + 1 - \mu(x_{21}) - \mu(x_{22}) - \mu(x_{23}) = 1 - 3\mu(x_{21}) - 2\mu(x_{22})
 		\end{split}
 	\end{equation}
-	For the first player to choose $A$ over $B$, the following condition must hold: $2\mu(x_{31}) - \mu(x_{32}) - 10\mu(x_{33}) > 1$. Given any belief system such that this condition holds, sequential rationality will imply that player 2 will choose $a$ at $x_{21}$ and $b$ at $x_{22}$. Then, in the beginning of the game, player 1 will play $C$. Notice, that in this game player 1 always arrives at his/her second information set. Then, a sequentially rational strategy $(A, C, a)$, implies that $P^\gamma(x_{31}) = 1$ and $P^\gamma(x_{32}) = P^\gamma(x_{33}) = P^\gamma(x_{34}) = 0$. Thus, a belief system should be $\mu = (1, 0, 0, 0)$ to be statistically consistent. This also satisfies the initial condition for $A$ to be preferred to $B$. Hence, a strategy profile $(A, C, a)$ and a belief system $\mu = (1, 0, 0, 0)$ is a WPBE.
+	For the second player to choose $a$ over $b$, the following condition must hold: $\mu(x_{21}) > \mu(x_{22})$. Given any belief system such that this condition holds, sequential rationality will imply that player 1 will choose $AC$. Notice, the information set of player 2 is always achieved. Then, a sequentially rational strategy $(AC, a)$, implies that $P^{(AC, a)}(x_{21}) = 1$ and $P^{(AC, a)}(x_{22}) = P^{(AC, a)}(x_{23}) = P^{(AC, a)}(x_{24}) = 0$. Thus, a statistically consistent belief system is $\mu = (1, 0, 0, 0)$, which also satisfies the initial condition for $a$ to be preferred to $b$. Hence, a strategy profile $(AC, a)$ and a belief system $\mu = (1, 0, 0, 0)$ is a WPBE.
 	
-	When $2\mu(x_{31}) - \mu(x_{32}) - 10\mu(x_{33}) < 1$, player 2 and 1 are indifferent between choosing $a$ or $b$, and $C$ or $D$, respectively. Furthermore, we know that WPBE $\subseteq$ NE\footnote{At first I thought that any of $\{(B, C, a), (B, C, b), (B, D, a), (B, D, b)\}$ will satisfy sequential rationality and that check for consistency will help to rule out $\{(B, C, a), (B, D, a)\}$. But I could only rule out $(B, C, a)$. And I am lost as to how either sequential rationality or consistency could help to rule out $(B, D, a)$ without imposing the relation between WPBE and NE.}. Therefore, any of the following pure strategies $\{(B, C, b), (B, D, b)\}$ satisfies sequential rationality given a belief system such that  $2\mu(x_{31}) - \mu(x_{32}) - 10\mu(x_{33}) < 1$. So, need to check consistency of beliefs for each of those pure strategies.
+	When $\mu(x_{21}) \leq \mu(x_{22})$, player 2 weakly prefers $b$ over $a$. Given such a belief system, sequential rationality requires player 1 to choose either $BC$ or $BD$. Consider a sequentially rational strategy $(BC, b)$. Given this strategy, $P^{(BC, b)}(x_{21}) = P^{(BC, b)}(x_{22}) = P^{(BC, b)}(x_{24}) = 0$ and $P^{(BC, b)}(x_{23}) = 1$. Hence, a statistically consistent belief system is $\mu = (0, 0, 1, 0)$, which also satisfies the condition for $b$ to be weakly preferred over $a$. Therefore, a pure strategy $\{(BC, b)\}$ and a belief system $\mu = (0, 0, 1, 0)$ constitutes a WPBE. 
 	
-	Given a strategy profile $(B, C, b)$, $P^{(B, C, b)}(x_{31}) = P^{(B, C, b)}(x_{33}) = P^{(B, C, b)}(x_{34}) = 0, P^{(B, C, b)}(x_{32}) = 1$. This implies that $\mu(x_{31}) = \mu(x_{33}) = \mu(x_{34}) = 0, \mu(x_{32}) = 1$. Such belief system also satisfies the condition for $(B, C, b)$ to be sequentially rational. Hence, $(B, C, b)$ and the belief system $\mu = (0, 1, 0, 0)$ is a WPBE.
+	Now, consider another sequentially rational strategy profile $(BD, b)$. Given this strategy, $P^{(BD, b)}(x_{21}) = P^{(BD, b)}(x_{22}) = P^{(BD, b)}(x_{23}) = 0, P^{(BD, b)}(x_{24}) = 1$. This implies $\mu = (0, 0, 0, 1)$, which again satisfies the condition for $(BC, b)$ to be sequentially rational. Hence, $(BC, b)$ and the belief system $\mu = (0, 0, 0, 1)$ is a WPBE.
 	
-	Given a strategy profile $(B, D, b)$, $P^{(B, D, b)}(x_{31}) = P^{(B, D, b)}(x_{32}) = P^{(B, D, b)}(x_{33}) = 0, P^{(B, D, b)}(x_{34}) = 1$. This implies that $\mu(x_{31}) = \mu(x_{32}) = \mu(x_{33}) = 0, \mu(x_{34}) = 1$. Such belief system also satisfies the condition for $(B, D, b)$ to be sequentially rational. Hence, $(B, D, b)$ and the belief system $\mu = (0, 0, 0, 1)$ is a WPBE.
-	
-	Therefore, the set of WPBE is the same as the set of NE, $\{(A, C, a), (B, C, b), (B, D, b)\}$, unlike in the original game, where the set of WPBE was $\{(A, C, a), (B, D, b)\}$.
+	Therefore, the set of WPBE is the same as the set of NE, $\{(AC, a), (BC, b), (BD, b)\}$, unlike in the original game, where the set of WPBE was $\{(A, C, a), (B, D, b)\}$.
 \end{enumerate}
 
 \subsection*{Exercise 4}
@@ -437,7 +420,7 @@ The following game in extensive form (with imperfect recall) has the same strate
 \subsubsection*{4.1}
 Notice that player 1 only has to provide one vector, e.g., $y$, whereas the second vector is automatically determined as $z = (4 - y_a, 4 - y_b)$. The set of all possible choices of the vector $y$ could be written as $y = 4(\alpha, \beta) \Longrightarrow z = 4(1 - \alpha, 1 - \beta), \quad\forall\alpha\in[0, 1], \forall\beta\in[0, 1]$. Therefore, the strategy space of player 1 is $S_1 = \{(4(\alpha, \beta), 4 (1 - \alpha, 1 - \beta)), \forall\alpha\in[0, 1], \forall\beta\in[0, 1]\}$.
 
-Unlike player 1, actions available to player 2 are discrete and the strategy space of player 2 could be written as $S_2 = \{Y, Z\}^{\#(S_1)}$, where $Y$ stands for choosing vector $y$ and $Z$ stands for choosing proposed vector $z$, for all $(y,z)\in S_1$. 
+Unlike player 1, actions available to player 2 are discrete and the strategy space of player 2 could be written as $S_2 = \{Y, Z\}^{\infty}$, where $Y$ stands for choosing vector $y$ and $Z$ stands for choosing proposed vector $z$, for all $(y,z)\in S_1$. 
 
  \subsubsection*{4.2}
 Notice that player 2 chooses $Y$ if $\min(\alpha, \beta) > \min(1 - \alpha, 1 - \beta)$ and chooses $Z$ if $\min(\alpha, \beta) < \min(1 - \alpha, 1 - \beta)$. Taking this into account, player 1 has to choose $\alpha$ and $\beta$ to maximize his/her own utility. Consider the following cases
@@ -446,55 +429,42 @@ Notice that player 2 chooses $Y$ if $\min(\alpha, \beta) > \min(1 - \alpha, 1 - 
 	Hence, $\min(\alpha,\beta) = \alpha$ and $\min(1 - \alpha, 1 - \beta) = 1 - \beta$.
 	\begin{itemize}
 		\item $\alpha < 1 - \beta$
-		In this case, player 2 chooses $Z$ and gets $4(1 - \beta)$. Therefore, player 1 gets $16\alpha\beta$.
+		In this case, player 2 chooses $Z$ and gets $4(1 - \beta)$. Therefore, player 1 gets $16\alpha\beta$ and his best response to set both $\alpha = \beta = 1 \Rightarrow$ \Lightning.
 		\item $\alpha > 1 - \beta$
-		Here, player 2 chooses $Y$ and gets $4\alpha$. Thus, player 1 gets $16(1 - \alpha)(1 - \beta)$.
+		Here, player 2 chooses $Y$ and gets $4\alpha$. Thus, player 1 gets $16(1 - \alpha)(1 - \beta)$ and his best response would be to set $\alpha = \beta = 0 \Rightarrow$ \Lightning.
 		\item $\alpha = 1 - \beta$
-		In this case player 2 is indifferent between $Y$ and $Z$ as both of them yield utility of $4\alpha = 4(1 - \beta)$ and player 1 accordingly gets $16(1 - \alpha)(1 - \beta) = 16\alpha\beta$.
+		In this case player 2 is indifferent between $Y$ and $Z$ as both of them yield utility of $4\alpha = 4(1 - \beta)$ and player 1 accordingly get $16(1 - \alpha)(1 - \beta) = 16\alpha\beta$. Then, best response of player 1 is to set $\alpha = \beta = \frac{1}{2} \Rightarrow$ \Lightning.
 	\end{itemize}
+	Therefore, $\alpha < \beta$ cannot be an equilibrium.
 	\item $\alpha > \beta$
 	Hence, $\min(\alpha,\beta) = \beta$ and $\min(1 - \alpha, 1 - \beta) = 1 - \alpha$.
 	\begin{itemize}
-		\item $\beta < 1 - \alpha \Longrightarrow \alpha < 1 - \beta$. As seen above, his implies that $\pi_1 = 16\alpha\beta$.
-		\item $\beta > 1 - \alpha \Longrightarrow \alpha > 1 - \beta \Longrightarrow \pi_1 = 16(1 - \alpha)(1 - \beta)$.
-		\item $\beta = 1 - \alpha \Longrightarrow \alpha = 1 - \beta \Longrightarrow \pi_1 = 16(1 - \alpha)(1 - \beta) = 16\alpha\beta$.
+		\item $\beta < 1 - \alpha \Longrightarrow \alpha < 1 - \beta$. As seen above, his implies that $\pi_1 = 16\alpha\beta$. Then, first player's best response is to set $\alpha = \beta = 1 \Rightarrow$ \Lightning.
+		\item $\beta > 1 - \alpha \Longrightarrow \alpha > 1 - \beta \Longrightarrow \pi_1 = 16(1 - \alpha)(1 - \beta)$. Hence, player 1's best response is to set $\alpha = \beta = 0 \Rightarrow$ \Lightning.
+		\item $\beta = 1 - \alpha \Longrightarrow \alpha = 1 - \beta \Longrightarrow \pi_1 = 16(1 - \alpha)(1 - \beta) = 16\alpha\beta$. Again, first player then wants to set $\alpha = \beta = \frac{1}{2} \Rightarrow$ \Lightning.
 	\end{itemize}
+	Therefore, condition $\alpha > \beta$ cannot hold in equilibrium.
 	\item $\alpha = \beta$
 	Hence, $\min(\alpha,\beta) = \alpha = \beta$ and $\min(1 - \alpha, 1 - \beta) = 1 - \alpha = 1 - \beta$.
 	\begin{itemize}
 		\item $\alpha < 1 - \alpha$
-		In this case, player 2 chooses $Z$ and gets $4(1 - \alpha)$ and player 1 gets $16\alpha^2$.
+		In this case, player 2 chooses $Z$ and gets $4(1 - \alpha)$ and player 1 gets $16\alpha^2$. Therefore, player 1 wants to set $\alpha =\beta = 1 \Rightarrow$ \Lightning.
 		\item $\alpha > 1 - \alpha$
-		Here, player 2 chooses $Y$ and gets $4\alpha$ and player 1 gets $16(1 - \alpha)^2$.
+		Here, player 2 chooses $Y$ and gets $4\alpha$ and player 1 gets $16(1 - \alpha)^2$. Therefore, he/she would want to choose $\alpha = \beta = 0 \Rightarrow$ \Lightning.
 		\item $\alpha = 1 - \alpha \Longrightarrow \alpha = \frac{1}{2}$.
-		Here, player 2 is indifferent between $Y$ and $Z$ and gets $2$. Player 1 gets payoff of $4$.
+		Here, player 2 is indifferent between $Y$ and $Z$ and gets $2$. Player 1's best response then is to set $\alpha = \beta = \frac{1}{2}$ and get payoff of $4$. \checkmark
 	\end{itemize}
 \end{enumerate}
-
-Graphically, these cases could be represented in the chart below:
-
-\begin{figure}[h]
-	\centering
-	\begin{tikzpicture}
-	\begin{axis}[
-	xlabel={$\alpha$}, ylabel={$\beta$}, zlabel={$\pi_1$},
-	ymajorgrids=false,
-	y dir=reverse,
-	]
-	
-	% Best response correspondence of player 1
-	\addplot3[surf, shader=interp, mesh/cols=3,opacity=0.5]
-	coordinates {(0,0,0) (0.5,0,0) (1,0,0)
-				(0,0.5,0) (0.5,0.5,4) (1,0.5,0)
-				(0,1,0) (0.5,1,0) (1,1,0)
-			};
-
-	\end{axis}
-	\end{tikzpicture}
-\end{figure}
-
-From the chart, it is straightforward that the best response of player 1 is to set $\alpha = \beta = \frac{1}{2}$. Therefore, the outcome of the game is $y = (2, 2); z = (2, 2)$ with $\pi_1 = 4$ and $\pi_2 = 2$. However, I can't give an explicit expression for SGPE in case where the set of pure strategies is infinite.
+Hence, the set of SGPE is $\{(((2, 2), (2, 2)), Y), (((2, 2), (2, 2)), Z)\}$.
 
 \subsubsection*{4.3}
+No, there are no other Nash equilibria with different payoffs. Any strategy such that player 2 always chooses $Y$, then player 1 proposes $y = (0, 0)$ and $z = (4, 4)$. But given such strategy of player 1, player 2 deviates to choosing $Z$. Similarly, if player 2 always chooses $Z$, player 1 proposes $y = (4, 4)$ and $z = (0, 0)$. But then player 2 again wants to deviate to choosing $Y$. Finally, for player 2 to be indifferent between $Y$ and $Z$, payoff from both strategies should be the same, i.e., $y = z = (2, 2)$. Given this strategy, neither player 1 nor player 2 has incentives to deviate. Therefore, any strategy $\{((2, 2), (2, 2)), \sigma_2\}$, where $\sigma_2 = (\sigma_2(Y), 1 - \sigma_2(Y)), \forall\sigma_2(Y)\in[0, 1]$, is a NE and yields the same payoffs for both players as SGPE strategies.
+
+\subsubsection*{4.4}
+In this case, the strategy space of the first player is the same: $\hat{S}_1 = S_1 = \{(4(\alpha, \beta), 4 (1 - \alpha, 1 - \beta)), \forall\alpha\in[0, 1], \forall\beta\in[0, 1]\}$. However, the strategy space of player 2 is now $\hat{S}_2 = \{Y, Z, D\}^\infty$, where $D$ stands for destroying the basket.
+
+The set of SGPE is the same as in the original game. The reason is that in all the perfect subgames where player 2 has to decide over his/her actions, it is never optimal to destroy the basket. Therefore, SGPE set in the modified game is $\{(((2, 2), (2, 2)), Y), (((2, 2), (2, 2)), Z)\}$.
+
+However, in the modified game there are now infinitely many NE with payoffs different from SGPE. Consider one possible division of the basket: $\tilde{y} = (2.5, 1)$ and $\tilde{z} = (1.5, 3)$. Suppose player 2's strategy is to choose $Z$ whenever player 1 proposes $(\tilde{y}, \tilde{z})$ and $D$ otherwise. Given such a strategy of player 2, it is optimal for player 1 to propose $(\tilde{y}, \tilde{z})$ and get a payoff of 2.5 rather than proposes any other division of the basket and get a payoff of 0. Given that player 1 proposes $(\tilde{y}, \tilde{z})$, player 2 is better of by choosing $Z$ (and getting a payoff of 1.5). Hence, this strategy profile is a NE. Similarly, any strategy profile for each possible division of the basket where player 2 threatens to destroy the basket in case player 1 proposes anything else would constitute a NE. Since the basket is perfectly divisible, there are infinitely many such Nash equilibria.
 
 \end{document}

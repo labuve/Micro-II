@@ -1,0 +1,201 @@
+\documentclass[]{article}
+\usepackage{amsmath, amsfonts}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{soul}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{pgfplots}	% To draw charts directly in Latex
+\usepackage{marvosym}	% For lightning symbol to denote contradiction
+\usepackage{cleveref}	% For clever referencing :)
+\usepackage{nameref}	% For referencing to the section name, not number
+\usepackage{slashbox}	% For putting a backslash in the table for players
+
+%TikZ package for drawing:
+\usepackage{tikz}
+%For calculation of coordinates:
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+
+%opening
+\title{Problem Set VI \\ \large Microeconomics II}
+\author{Nurfatima Jandarova}
+\date{\today}
+\pagestyle{fancy}
+
+\lhead{Microeconomics II, Problem Set VI}
+\rhead{Nurfatima Jandarova}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyheadoffset{1 cm}
+
+\geometry{a4paper, left=20mm, top=20mm, bottom = 20mm, headheight=20mm}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\renewcommand{\arraystretch}{1.3}
+
+\setul{0.2ex}{0.2ex}
+\setulcolor{red}
+
+% Define a checkmark
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Exercise 1}
+
+The set of NE in pure strategies is $\{(M, l), (L, r)\}$.
+
+\begin{enumerate}
+	\item $\gamma_1 = (0, 1, 0), \gamma_2 = (1, 0)$
+	Define $\gamma_{1k} = (\rho\varepsilon_{1k}, 1 - (1 + \rho)\varepsilon_{1k}, \varepsilon_{1k}), \gamma_{2k} = (1 - \varepsilon_{2k}, \varepsilon_{2k})$ such that $\lim\limits_{k\to\infty}\varepsilon_{1k} = \lim\limits_{k\to\infty}\varepsilon_{2k} = 0$, for some $\rho > 0$.
+	
+	Then, induced belief system is $\mu_{2k} = (\frac{1 - (1 + \rho)\varepsilon_{1k}}{1 - \rho\varepsilon_{1k}}, \frac{\varepsilon_{1k}}{1 - \rho\varepsilon_{1k}}) \to (1, 0)$ as $k\to\infty$.
+	
+	Given the belief system $\mu_2 = (1, 0)$, player 2 prefers to choose $l$ and player 1's best response then is to choose $M$. Hence, $(\gamma_1, \gamma_2) = ((0, 1, 0), (1, 0))$ and $\mu_2 = (1, 0)$ constitute a sequential equilibrium.
+	
+	\item $\gamma_1 = (1, 0, 0)$ and $\gamma_2 = (0, 1)$. Define $\gamma_{1k} = (1 - (1 + \rho)\varepsilon_{1k}, \rho\varepsilon_{1k}, \varepsilon_{1k}), \gamma_{2k} = (\varepsilon_{2k}, 1 - \varepsilon_{2k})$, where $\lim\limits_{k\to\infty}\varepsilon_{1k} = \lim\limits_{k\to\infty}\varepsilon_{2k} = 0$, for some $\rho > 0$.
+	
+	Induced belief system is $\mu_{2k} = (\frac{\rho\varepsilon_{1k}}{(1 + \rho)\varepsilon_{1k}}, \frac{\varepsilon_{1k}}{(1 + \rho)\varepsilon_{1k}}) = (\frac{\rho}{1 + \rho}, \frac{1}{1 + \rho}) \to (\frac{\rho}{1 + \rho}, \frac{1}{1 + \rho})$ as $k\to\infty$.
+	\begin{equation}
+		\begin{split}
+			\pi_2(l|\mu_2, H_2) = \frac{\rho}{1 + \rho} \leq \pi_2(r|\mu_2, H_2) = \frac{1}{1 + \rho} \iff \rho\leq 1 \nonumber
+		\end{split}
+	\end{equation}
+	Then, player 1's best response is to play $L$. Therefore, $(\gamma_1, \gamma_2) = ((1, 0, 0), (0, 1))$ and any belief system $\mu_2 = (\frac{\rho}{1 + \rho}, \frac{1}{1 + \rho})$ such that $\rho\in(0, 1]$ is a sequential equilibrium given.
+	
+	\item $\gamma_1 = (1, 0, 0)$ and $\gamma_2 = (q, 1 - q), \forall q\in[0, 1]$. Define $\gamma_{1k} = (1 - 2\varepsilon_{1k}, \varepsilon_{1k}, \varepsilon_{1k}), \gamma_{2k} = (q, 1 - q)$, where $\lim\limits_{k\to\infty}\varepsilon_{1k} = 0$.
+	
+	Induced belief system is $\mu_{2k} = (\frac{1}{2}, \frac{1}{2}) \to (\frac{1}{2}, \frac{1}{2})$ as $k\to\infty$.
+	\begin{equation}
+		\begin{split}
+			\pi_2(l|\mu_2, H_2) = \frac{1}{2} = \pi_2(r|\mu_2, H_2) \nonumber
+		\end{split}
+	\end{equation}
+	Hence, $\gamma_2 = (q, 1 - q)$ is optimal for player 2 in his information set given the belief system $\mu_2 = (\frac{1}{2}, \frac{1}{2})$. Let's compare payoff of player 1 following strategy $\gamma_1$ and deviating to strategy $\hat{\gamma_1} = (1 - \nu, \nu, 0)$ for some $\nu > 0$:
+	\begin{equation}
+		\begin{split}
+			\pi_1(\gamma_1, \gamma_2|\mu_2) = 2 \geq 2 - \nu(1 - 2q) = \pi_1(\hat{\gamma_1}, \gamma_2|\mu_2) \iff q \leq\frac{1}{2} \nonumber
+		\end{split}
+	\end{equation}
+	Hence, all strategy profiles $(\gamma_1 = (1, 0, 0), \gamma_2 = (q, 1 - q)), \forall q\leq\frac{1}{2}$ given the belief system $\mu_2 = (\frac{1}{2}, \frac{1}{2})$ constitute sequential equilibria.
+\end{enumerate}
+
+\subsubsection*{Exercise 2}
+
+Let's first find all NE in pure strategies. From \Cref{tab:ex2str}, we can see that the set of NE in pure strategies is $\{(M, r, a), (R, l, a)\}$.
+
+\begin{table}[h]
+	\centering
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		Player 3 plays $a$ \\
+		\begin{tabular}{c|cc}
+			\backslashbox{1}{2} & $l$ & $r$ \\\hline
+			L & (0, \ul{1}, \ul{0}) & (0, 0, \ul{0}) \\
+			M & (0, 1, \ul{1}) & (\ul{2}, \ul{2}, \ul{1}) \\
+			R & (\ul{1}, \ul{0}, \ul{0}) & (1, \ul{0}, \ul{0})
+		\end{tabular}
+	\end{minipage}
+	\begin{minipage}{0.49\linewidth}
+		\centering
+		Player 3 plays $b$ \\
+		\begin{tabular}{c|cc}
+			\backslashbox{1}{2} & $l$ & $r$ \\\hline
+			L & (0, \ul{1}, \ul{0}) & (0, 0, \ul{0}) \\
+			M & (0, \ul{1}, 0) & (0, 0, 0) \\
+			R & (\ul{1}, 0, \ul{0}) & (\ul{1}, 0, \ul{0})
+		\end{tabular}
+	\end{minipage}
+	\caption{Strategic form of the game}
+	\label{tab:ex2str}
+\end{table}
+
+\begin{itemize}
+	\item[$(M, r, a)$] Define completely mixed strategies of players $\gamma_{1k} = (\rho\varepsilon_{1k}, 1 - (1 + \rho)\varepsilon_{1k}, \varepsilon_{1k}), \gamma_{2k} = (\varepsilon_{2k}, 1 - \varepsilon_{2k}), \gamma_{3k} = (1 - \varepsilon_{3k}, \varepsilon_{3k})$ for some $\rho > 0$ such that $\varepsilon_{sk}\underset{k\to\infty}{\longrightarrow}0, \forall s\in\{1,2,3\}$. Thus, $\lim\limits_{k\to\infty}\gamma_{1k} = (0, 1, 0), \lim\limits_{k\to\infty}\gamma_{2k} = (0, 1), \lim\limits_{k\to\infty}\gamma_{3k} = (1, 0)$.
+	
+	These strategies induce the following beliefs:
+	\begin{equation}
+		\begin{split}
+			\mu_{2k} = (\frac{\rho\varepsilon_{1k}}{1 - \varepsilon_{1k}}, \frac{1 - (1 + \rho)\varepsilon_{1k}}{1 - \varepsilon_{1k}}) \underset{k\to\infty}{\longrightarrow} (0, 1) = \mu_2 \\ \nonumber
+			\mu_{3k} = (\varepsilon_{2k}, 1 - \varepsilon_{2k}) \underset{k\to\infty}{\longrightarrow} (0, 1) = \mu_3 
+		\end{split}
+	\end{equation}
+	
+	Given this belief system
+	\begin{equation}
+		\begin{split}
+			\pi_3(a|\mu_2, \mu_3, H_3) = 1 > 0 = \pi_3(b|\mu_2, \mu_3, H_3) &\Rightarrow \gamma_3^* = (1, 0) \\ \nonumber
+			\pi_2((l, a)|\mu_2, \mu_3, H_2) = 1 < 2 = \pi_2((r, a)|\mu_2, \mu_3, H_2) &\Rightarrow \gamma_2^* = (0, 1) \\
+			\begin{cases}
+			\pi_1((L, r, a)|\mu_2, \mu_3, H_1) = 0 < 2 = \pi_1((M, r, a)|\mu_2, \mu_3, H_1) \\
+			\pi_1((M, r, a)|\mu_2, \mu_3, H_1) = 2 > 1 = \pi_1((R, r, a)|\mu_2, \mu_3, H_1)
+			\end{cases} &\Rightarrow \gamma_1^* = (0, 1, 0)
+		\end{split}
+	\end{equation}
+	Hence, a strategy profile $\gamma^* = (\gamma_1^*, \gamma_2^*, \gamma_3^*)$ and a belief system $\mu^* = (\mu_2, \mu_3)$ is a sequential equilibrium.
+	
+	\item[$(R, l, a)$] Define completely mixed strategies of players $\gamma_{1k} = (\rho\varepsilon_{1k}, \varepsilon_{1k}, 1 - (1 + \rho)\varepsilon_{1k}), \gamma_{2k} = (1 - \varepsilon_{2k}, \varepsilon_{2k}), \gamma_{3k} = (1 - \varepsilon_{3k}, \varepsilon_{3k})$ for some $\rho > 0$ such that $\varepsilon_{sk}\underset{k\to\infty}{\longrightarrow}0, \forall s\in\{1,2,3\}$. Thus, $\lim\limits_{k\to\infty}\gamma_{1k} = (0, 0, 1), \lim\limits_{k\to\infty}\gamma_{2k} = (1, 0), \lim\limits_{k\to\infty}\gamma_{3k} = (1, 0)$.
+	
+	These strategies induce following beliefs:
+	\begin{equation}
+		\begin{split}
+			\mu_{2k} = (\frac{\rho}{1 + \rho}, \frac{1}{1 + \rho}) \underset{k\to\infty}{\longrightarrow} (\frac{\rho}{1 + \rho}, \frac{1}{1 + \rho}) = \mu_2 \\ \nonumber
+			\mu_{3k} = (1 - \varepsilon_{2k}, \varepsilon_{2k}) \underset{k\to\infty}{\longrightarrow} (1, 0) = \mu_3
+		\end{split}
+	\end{equation}
+	
+	Given this belief system
+	\begin{equation}
+		\begin{split}
+			\pi_3(a|\mu_2, \mu_3, H_3) = 1 > 0 = \pi_3(b|\mu_2, \mu_3, H_3) &\Rightarrow \gamma_3^* = (1, 0) \\ \nonumber
+			\pi_2((l, a)|\mu_2, \mu_3, H_2) = 1 > \frac{2}{1 + \rho} = \pi_2((r, a)|\mu_2, \mu_3, H_2) &\Rightarrow \gamma_2^* = (1, 0) \iff \rho > 1 \\
+			\pi_1((L, l, a)|\mu_2, \mu_3, H_1) = \pi_1((M, l, a)|\mu_2, \mu_3, H_1) = 0 < 1 = \pi_1((R, l, a)|\mu_2, \mu_3, H_1)
+			 &\Rightarrow \gamma_1^* = (0, 0, 1) \iff \rho > 1
+		\end{split}
+	\end{equation}
+	
+	Hence, a strategy profile $\gamma^* = (\gamma_1^*, \gamma_2^*, \gamma_3^*)$ and a belief system $\mu^* = (\mu_2, \mu_3)$ such that $\rho > 1$ is another sequential equilibrium.
+\end{itemize}
+
+\subsection*{Exercise 3}
+
+The game could be formalized as a Bayesian game $BG = \{N, T, A, P, \{\pi_i\}_{i\in N}\}$, where
+\begin{itemize}[label={}]
+	\item $N = \{1, 2\}$;
+	\item $T = T_1\times T_2 = \{b_1, b_2\}\times\{t_2\}$, where $b_1$ refers to the first box and $b_2$ refers to the second box (notice that there's only one type of player 2);
+	\item $A = \{A, B\}\times\{C, D\}$;
+	\item $P: T \to [0, 1], \begin{matrix}
+	(b_1, t_2) \mapsto \frac{1}{2} \\
+	(b_2, t_2) \mapsto \frac{1}{2} \\
+	\end{matrix}$;
+	\item $\pi_i: T\times A\to \mathbb{R}$ specified by the table in the problem.
+\end{itemize}
+
+Suppose player 2 thinks that player 1's strategy is $\gamma_1(b_1) = (p_1, 1 - p_1)$ and $\gamma_1(b_2) = (p_2, 1 - p_2)$. Then,
+\begin{equation}
+	\begin{split}
+		\mathbb{E}\pi_2(C)& = \frac{1}{2}[\pi_2((b_1, t_2), \gamma_1(b_1), C) + \pi_2((b_2, t_2), \gamma_1(b_2), C)] = \frac{1}{2}(p_1 + 2p_2 + 1 - p_2) = \frac{1}{2}(1 + p_1 + p_2) \\ \nonumber
+		\mathbb{E}\pi_2(D)& = \frac{1}{2}[\pi_2((b_1, t_2), \gamma_1(b_1), D) + \pi_2((b_2, t_2), \gamma_1(b_2), D)] = \frac{1}{2}(4p_2 + 3(1 - p_2)) = \frac{1}{2}(3 + p_2) \\
+		\mathbb{E}\pi_2(D) - \mathbb{E}\pi_2(C)& = \frac{1}{2}(3 + p_2 - 1 - p_1 - p_2) = \frac{1}{2}(2 - p_1) > 0, \forall p_1\in[0, 1], \forall p_2\in[0, 1]
+	\end{split}
+\end{equation}
+Hence, player 2 maximizes expected payoff by choosing $D$ and $\gamma_2^* = (0, 1)$.
+
+Then, player 1 makes decision based on
+\begin{equation}
+	\begin{split}
+		\frac{1}{2}[\pi_1((b_1, t_2), A, \gamma_2^*) + \pi_1((b_2, t_2), A, \gamma_2^*)] = 0 < \frac{1}{2} = \frac{1}{2}[\pi_1((b_1, t_2), B, \gamma_2^*) + \pi_1((b_2, t_2), B, \gamma_2^*)] \Rightarrow\gamma_1^* = (0, 1)\nonumber
+	\end{split}
+\end{equation}
+
+Therefore, a strategy profile $\gamma^* = \{\gamma_1^*, \gamma_2^*\}$ is a BNE in pure strategies. 
+\end{document}

@@ -2,7 +2,7 @@
 \usepackage{amsmath, amsfonts}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
-\usepackage{geometry}
+\usepackage[headsep=.2in]{geometry}
 \usepackage{cancel}
 \usepackage{graphicx}
 \usepackage{color}
@@ -32,7 +32,7 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \fancyheadoffset{1 cm}
 
-\geometry{a4paper, left=20mm, top=20mm, bottom = 20mm, headheight=20mm}
+\geometry{a4paper, left=20mm, top=20mm, bottom = 20mm, headheight=8mm}
 
 \sloppy
 \definecolor{lightgray}{gray}{0.5}
@@ -197,5 +197,230 @@ Then, player 1 makes decision based on
 	\end{split}
 \end{equation}
 
-Therefore, a strategy profile $\gamma^* = \{\gamma_1^*, \gamma_2^*\}$ is a BNE in pure strategies. 
+Therefore, a strategy profile $\gamma^* = \{\gamma_1^*, \gamma_2^*\}$ is a BNE in pure strategies.
+
+\subsection*{Exercise 4}
+
+The game could be described as a Bayesian game $BG = \{N, T, A, P, \{\pi_i\}_{i\in N}\}$, where
+\begin{itemize}[label={}]
+	\item $N = \{1, 2\}$;
+	\item $T = T_1\times T_2 = \{c^h, c^l\}^2$;
+	\item $A = \mathbb{R}_+^2$;
+	\item \begin{flalign}
+			P: T &\to [0, 1] && \nonumber\\
+			(c^h, c^h) &\mapsto p^2 \nonumber\\
+			(c^h, c^l) &\mapsto p(1 - p) \nonumber\\
+			(c^l, c^h) &\mapsto (1 - p)p \nonumber\\
+			(c^l, c^l) &\mapsto (1 - p)^2\nonumber
+	\end{flalign}
+	\item \begin{flalign}
+			\pi_i: T\times A&\to \mathbb{R}  \nonumber\\
+			(t_i, t_j, q_i, q_j)&\mapsto\max\{M - d(q_i + q_j), 0\}q_i - t_iq_i, \qquad\forall i\in N &&\nonumber
+	\end{flalign}
+	where $t_i\in T_i, \forall i\in N$ is a generic notation for a realization of the type of any player $i$ and $q_i$ is a typical element of $A_i$.
+\end{itemize}
+Since both firms could either be of high or low type and each firm only knows its own marginal cost, the equilibrium is symmetric, i.e., only depends on the realization of the type rather than the individual firm. Define strategy of each type of the firm as $\gamma_i:T_i\to\mathbb{R+}, c^h \mapsto q^h, c^l \mapsto q^l, \forall i\in N$. Hence, each type of the firm chooses output to maximize respective profit function given expectation of the other firm's strategy:
+
+\begin{equation}
+	\begin{split}
+		\max\limits_{q^h}&\quad\pi_i(q^h, \gamma_j|t_i = c^h)=\max\{M - d[q^h + pq^h + (1 - p)q^l], 0\}q^h - c^hq^h\nonumber \text{ s.t. }q^h\geq 0, \qquad\forall i\in N\\
+		\mathcal{L}^h& = (M - d[q^h + pq^h + (1 - p)q^l])q^h - c^hq^h + \mu(M - d[q^h + pq^h + (1 - p)q^l]) + \lambda q^h \\ \nonumber
+		&M - d(1 - p)q^l - c^h - \mu d(1 + p) + \lambda = 2dq^h(1 + p) \\
+		&\min\{\mu, M - d[q^h + pq^h + (1 - p)q^l]\} = 0\\
+		&\min\{\lambda, q^h\} = 0
+		\intertext{Case I: $M - d[q^h + pq^h + (1 - p)q^l] > 0 \Rightarrow \mu = 0$ and $q^h > 0\Rightarrow\lambda = 0$}
+		&2dq^h(1 + p) =  M - d(1 - p)q^l - c^h \\
+		&q^h = \frac{M - d(1 - p)q^l - c^h}{2d(1 + p)}\text{ if }M - d(1 - p)q^l - c^h > 0
+		\intertext{Case II: $M - d(1 - p)q^l > 0 \Rightarrow \mu = 0$ and $q^h = 0\Rightarrow\lambda \geq 0$}
+		&\begin{cases}
+			q^h = 0 \\
+			M - d(1 - p)q^l - c^h + \lambda = 0 
+		\end{cases}\begin{cases}
+			q^h = 0 \\
+			\lambda = c^h -(M - d(1 - p)q^l)
+		\end{cases}\text{ if } c^h \geq (M - d(1 - p)q^l)
+		\intertext{Case III: $M - d[q^h + pq^h + (1 - p)q^l] = 0 \Rightarrow \mu \geq 0$ and $q^h > 0 \Rightarrow \lambda = 0$}
+		&\begin{cases}
+			M - d(1 - p)q^l - c^h - \mu d(1 + p) = 2dq^h(1 + p) \\
+			M - dq^h(1 + p) - d(1 - p)q^l = 0
+		\end{cases}\begin{cases}
+			\mu = -\frac{c^h + M - d(1 - p)q^l}{d(1 + p)} \leq 0 \Rightarrow \text{\Lightning}\\
+			q^h = \frac{M - d(1 - p)q^l}{d(1 + p)}
+		\end{cases}
+		\intertext{Case IV: $M - d(1 - p)q^l = 0 \Rightarrow \mu \geq 0$ and $q^h = 0 \Rightarrow \lambda \geq 0$}
+		&\begin{cases}
+			q^h = 0 \\
+			M - d(1 - p)q^l = 0 \\
+			\lambda - \mu d(1 + p) = c^h 
+		\end{cases}
+		\intertext{Hence, the best response correspondence of the high cost firm is}
+		&\rho_h(q^l) = \begin{cases}
+		\frac{M - d(1 - p)q^l - c^h}{2d(1 + p)}&\text{ if }M - d(1 - p)q^l - c^h > 0 \\
+		0&\text{ if }c^h \geq M - d(1 - p)q^l > 0 \text{ or } M - d(1 - p)q^l = 0
+		\end{cases}
+	\end{split}
+\end{equation}
+Similarly, for the low cost firm
+\begin{equation}
+	\begin{split}
+		\max\limits_{q^l}&\quad\pi_i(q^l, \gamma_j|t_i = c^l)=\max\{M - d[q^l + pq^h + (1 - p)q^l], 0\}q^l - c^lq^l\text{ s.t. }q^l\geq 0, \qquad\forall i\in N\\
+		\mathcal{L}^l& = (M - d[q^l + pq^h + (1 - p)q^l])q^l - c^lq^l + \nu(M - d[q^l + pq^h + (1 - p)q^l]) + \phi q^l \\ \nonumber
+		&M - dpq^h - c^l - \nu d(2 - p) + \phi = 2d(2 - p)q^l \\
+		&\min\{\nu, M - dpq^h - d(2 - p)q^l\} = 0 \\
+		&\min\{\phi, q^l\} = 0
+		\intertext{Case I: $M - dpq^h - d(2 - p)q^l > 0 \Rightarrow \nu = 0$ and $q^l > 0 \Rightarrow \phi = 0$}
+		&M - dpq^h - c^l = 2d(2 - p)q^l \\
+		&q^l = \frac{M - dpq^h - c^l}{2d(2 - p)}\text{ if }M - dpq^h - c^l > 0
+		\intertext{Case II: $M - dpq^h > 0 \Rightarrow \nu = 0$ and $q^l = 0 \Rightarrow \phi \geq 0$}
+		&\begin{cases}
+			M - dpq^h - c^l + \phi = 0 \\
+			q^l = 0
+		\end{cases}\begin{cases}
+			\phi = -(M - dpq^h - c^l)\\
+			q^l = 0
+		\end{cases}\text{ if }M - dpq^h \leq c^l
+		\intertext{Case III: $M - dpq^h - d(2 - p)q^l = 0 \Rightarrow \nu \geq 0$ and $q^l > 0 \Rightarrow \phi = 0$}
+		&\begin{cases}
+			M - dpq^h - c^l - \nu d(2 - p) = 2d(2 - p)q^l \\
+			M - dpq^h - d(2 - p)q^l = 0
+		\end{cases}\begin{cases}
+			- c^l - \nu d(2 - p) = M - dpq^h\\
+			q^l = \frac{M - dpq^h}{d(2 - p)}
+		\end{cases}\begin{cases}
+			\nu = -\frac{c^l + M - dpq^h}{d(2 - p)} < 0 \Rightarrow\text{\Lightning}\\
+			q^l = \frac{M - dpq^h}{d(2 - p)}
+		\end{cases}
+		\intertext{Case IV: $M - dpq^h = 0 \Rightarrow \nu \geq 0$ and $q^l = 0 \Rightarrow \phi \geq 0$}
+		&\begin{cases}
+			- c^l - \nu d(2 - p) + \phi = 0 \\
+			M - dpq^h = 0 \\
+			q^l = 0
+		\end{cases}\begin{cases}
+			\phi - \nu d(2 - p) = c^l \\
+			M - dpq^h = 0 \\
+			q^l = 0
+		\end{cases}
+		\intertext{Hence, the best response correspondence of the low cost firm is}
+		&\rho_l(q^h) = \begin{cases}
+		\frac{M - dpq^h - c^l}{2d(2 - p)}&\text{ if }M - dpq^h - c^l > 0 \\
+		0&\text{ if }c^l\geq M - dpq^h > 0 \text{ or } M - dpq^h = 0
+		\end{cases}
+	\end{split}
+\end{equation}
+So, equilibrium strategy is found at the intersection of the two best responses. Suppose, first, that optimal strategies are interior solutions:
+\begin{equation}
+	\begin{split}
+		q^h& = \frac{M - c^h}{2d(1 + p)} - \frac{(1 - p)}{2(1 + p)}\Bigg(\frac{M - c^l}{2d(2 - p)} - \frac{pq^h }{2(2 - p)}\Bigg)^{\footnotemark}\Rightarrow\\\nonumber
+		\gamma^*(c^h)& = \frac{(3 - p)M - 2(2 - p)c^h + (1 - p)c^l}{d(8 + 3p - 3p^2)} \Rightarrow \gamma^*(c^l) = \frac{(2 + p)M + pc^h - 2(1 + p)c^l}{d(8 + 3p - 3p^2)}
+	\end{split}
+\end{equation}
+\footnotetext{I hope you don't mind that I'm skipping the tedious calculation steps here. If not, I am sorry. I was too lazy to type it all up.}
+For these to be optimal strategies the following condition needs to hold:
+\begin{equation}
+	c^h < \frac{(3 - p)M + (1 - p)c^l}{2(2 - p)}
+\end{equation}
+Notice that $\gamma^*(c^l) > 0$ because $(2 + p)M + pc^h - 2(1 + p)c^l = (2 + p)\underbrace{(M - c^l)}_{>0} + p\underbrace{(c^h - c^l)}_{>0} > 0$.
+
+Suppose there exists an equilibrium such that $q^h = 0, q^l > 0$. From the best response correspondence of low-type firm, we infer that $q^l = \frac{M - c^l}{2d(2 - p)}$. Given this strategy, optimal $q^h = 0$ if\footnote{Strictly speaking, there's another condition. But it holds regardless of the values of the model: $M - (1 - p)\frac{M - c^l}{2(2 - p)} = \frac{(3 - p)M + (1 - p)c^l}{2(2 - p)} > 0$}
+\begin{equation}
+	c^h \geq \frac{(3 - p)M + (1 - p)c^l}{2(2 - p)}
+	\label{eq: ex4cornerhc}
+\end{equation}
+Hence, whenever \eqref{eq: ex4cornerhc} holds, the equiliubrium strategies are $\gamma^*(c^l) = \frac{M - c^l}{2d(2 - p)}, \gamma^*(c^h) = 0$.
+
+Suppose there is another equilibrium such that $q^h > 0, q^l = 0$. From the best response of high-cost firm $q^h = \frac{M - c^h}{2d(1 + p)}$. Then, $M - p\frac{M - c^h}{2(1 + p)} - c^l = \frac{(2 + p)(M - c^l) + p(c^h - c^l)}{2(1 + p)} > 0 \Rightarrow q^{l*} = \frac{\frac{(2 + p)(M - c^l) + p(c^h - c^l)}{2(1 + p)}}{2d(2 - p)}$ \Lightning
+
+Suppose there is an equilibrium such that both $q^h = q^l = 0$. But the best response of the low-cost firm is to set $q^l = \frac{M - c^l}{2d(2 - p)} > 0$ \Lightning
+
+Therefore, there are two Bayesian equilibria:
+\begin{equation}
+	\begin{split}
+		&\begin{cases}
+			\gamma^*(c^h)& = \frac{(3 - p)M - 2(2 - p)c^h + (1 - p)c^l}{d(8 + 3p - 3p^2)} \\
+			\gamma^*(c^l)& = \frac{(2 + p)M + pc^h - 2(1 + p)c^l}{d(8 + 3p - 3p^2)}
+		\end{cases}\text{ if } c^h < \frac{(3 - p)M + (1 - p)c^l}{2(2 - p)}\\ \nonumber
+		&\begin{cases}
+			\gamma^*(c^h)& = 0 \\
+			\gamma^*(c^l)& = \frac{M - c^l}{2d(2 - p)}
+		\end{cases}\text{ if } c^h \geq \frac{(3 - p)M + (1 - p)c^l}{2(2 - p)}
+	\end{split}
+\end{equation}
+
+{\huge\textcolor{red}{Dependence on p}}
+
+\subsection*{Exercise 5}
+
+The game could be described as a Bayesian game $BG = \{N, T, A, P, \{\pi_i\}_{i\in N}\}$, where
+\begin{itemize}[label={}]
+	\item $N = \{1, 2\}$;
+	\item $T = V^2 = \{v_0, v_1\}^2$;
+	\item $A = \{v_0, v_1, \frac{v_0 + v_1}{2}\}^2$;
+	\item $P: T \to [0, 1], \qquad (v, v') \mapsto \frac{1}{4},\forall(v, v')\in V^2$;
+	\item $\pi_i: T\times A\to \mathbb{R}$ specified in the \Cref{tab:ex5payoff}.
+\end{itemize}
+
+\begin{table}[h]
+	\begin{minipage}{0.4\linewidth}
+		\begin{tabular}{c|ccc}
+			\backslashbox{$v_0$}{$v_0$} & $v_0$ & $v_1$ & $\frac{v_0 + v_1}{2}$ \\\hline
+			$v_0$ & (0, 0) & (0, $v_0 - v_1$) & (0, $\frac{v_0 - v_1}{2}$) \\
+			$v_1$ & ($v_0 - v_1$, 0) & ($\frac{v_0 - v_1}{2}$, $\frac{v_0 - v_1}{2}$) & ($v_0 - v_1$, 0) \\
+			$\frac{v_0 + v_1}{2}$ & ($\frac{v_0 - v_1}{2}$, 0) & (0, $v_0 - v_1$) & ($\frac{v_0 - v_1}{4}$, $\frac{v_0 - v_1}{4}$)
+		\end{tabular}
+	\end{minipage}\hfill
+	\begin{minipage}{0.4\linewidth}
+		\begin{tabular}{c|ccc}
+			\backslashbox{$v_0$}{$v_1$} & $v_0$ & $v_1$ & $\frac{v_0 + v_1}{2}$ \\\hline
+			$v_0$ & (0, $\frac{v_1 - v_0}{2}$) & (0, 0) & (0, $\frac{v_1 - v_0}{2}$) \\
+			$v_1$ & ($v_0 - v_1$, 0) & ($\frac{v_0 - v_1}{2}$, 0) & ($v_0 - v_1$, 0) \\
+			$\frac{v_0 + v_1}{2}$ & ($\frac{v_0 - v_1}{2}$, 0) & (0, 0) & ($\frac{v_0 - v_1}{4}$, $\frac{v_1 - v_0}{4}$)
+		\end{tabular}
+	\end{minipage}\\
+	\\
+	\\
+	\begin{minipage}{0.4\linewidth}
+		\begin{tabular}{c|ccc}
+			\backslashbox{$v_1$}{$v_0$} & $v_0$ & $v_1$ & $\frac{v_0 + v_1}{2}$ \\\hline
+			$v_0$ & ($\frac{v_1 - v_0}{2}$, 0) & (0, $v_0 - v_1$) & (0, $\frac{v_0 - v_1}{2}$) \\
+			$v_1$ & (0, 0) & (0, $\frac{v_0 - v_1}{2}$) & (0, 0) \\
+			$\frac{v_0 + v_1}{2}$ & ($\frac{v_1 - v_0}{2}$, 0) & (0, $v_0 - v_1$) & ($\frac{v_1 - v_0}{4}$, $\frac{v_0 - v_1}{4}$)
+		\end{tabular}
+	\end{minipage}\hfill
+	\begin{minipage}{0.4\linewidth}
+		\begin{tabular}{c|ccc}
+			\backslashbox{$v_1$}{$v_1$} & $v_0$ & $v_1$ & $\frac{v_0 + v_1}{2}$ \\\hline
+			$v_0$ & ($\frac{v_1 - v_0}{2}$, $\frac{v_1 - v_0}{2}$) & (0, 0) & (0, $\frac{v_1 - v_0}{2}$) \\
+			$v_1$ & (0, 0) & (0, 0) & (0, 0) \\
+			$\frac{v_0 + v_1}{2}$ & ($\frac{v_1 - v_0}{2}$, 0) & (0, 0) & ($\frac{v_1 - v_0}{4}$, $\frac{v_1 - v_0}{4}$)
+		\end{tabular}
+	\end{minipage}
+	\caption{Payoff table}
+	\label{tab:ex5payoff}
+\end{table}
+
+Notice again that the definition of the game assumes symmetric solution, i.e., it only depends on the type of the buyer, not an individual buyer per se. Define $\forall i\in N$ strategy as $\gamma_i:T_i\to\{v_0, v_1, \frac{v_0 + v_1}{2}\}$. Hence, a strategy profile is $\gamma = (\gamma(v_0), \gamma(v_1))$. Note that $\gamma^*(v_0) = v_0$ is strictly dominant strategy with a payoff of zero regardless of the types of the other player; otherwise, get negative payoff.
+
+Now, suppose $\gamma^*(v_1) = v_0$. Then, $\forall i\in N$ and $j\neq i$
+\begin{equation}
+	\begin{split}
+		\mathbb{E}\pi_i(v_0|t_i = v_1)& = P(t_j = v_0|t_i = v_1)\pi_i(t_j = v_0, v_0, \gamma^*(v_0)|t_i = v_1) + P(t_j = v_1|t_i = v_1)\pi_i(t_j = v_1, v_0, \gamma^*(v_1)|t_i = v_1)\\\nonumber
+		& = \frac{1}{2}\frac{v_1 - v_0}{2} + \frac{1}{2}\frac{v_1 - v_0}{2} = \frac{v_1 - v_0}{2}\\
+		\mathbb{E}\pi_i({\scriptstyle\frac{v_0 + v_1}{2}}|t_i = v_1)& = P(t_j = v_0|t_i = v_1)\pi_i(t_j = v_0, {\scriptstyle\frac{v_0 + v_1}{2}}, \gamma^*(v_0)|t_i = v_1)\\& + P(t_j = v_1|t_i = v_1)\pi_i(t_j = v_1, {\scriptstyle\frac{v_0 + v_1}{2}}, \gamma^*(v_1)|t_i = v_1) = \frac{1}{2}\frac{v_1 - v_0}{2} + \frac{1}{2}\frac{v_1 - v_0}{2} = \frac{v_1 - v_0}{2}\\
+		\mathbb{E}\pi_i(v_1|t_i = v_1)& = P(t_j = v_0|t_i = v_1)\pi_i(t_j = v_0, v_1, \gamma^*(v_0)|t_i = v_1) + P(t_j = v_1|t_i = v_1)\pi_i(t_j = v_1, v_1, \gamma^*(v_1)|t_i = v_1) = 0
+	\end{split}
+\end{equation}
+Hence, indeed $\gamma^*(v_1) = v_0$ is part of the BNE.
+
+Now, suppose $\gamma^*(v_1) = \frac{v_0 + v_1}{2}$. Then, $\forall i\in N$ and $j\neq i$
+\begin{equation}
+	\begin{split}
+		\mathbb{E}\pi_i(v_0|t_i = v_1)& = P(t_j = v_0|t_i = v_1)\pi_i(t_j = v_0, v_0, \gamma^*(v_0)|t_i = v_1) + P(t_j = v_1|t_i = v_1)\pi_i(t_j = v_1, v_0, \gamma^*(v_1)|t_i = v_1)\\\nonumber
+		& = \frac{1}{2}\frac{v_1 - v_0}{2} = \frac{v_1 - v_0}{4} \\
+		\mathbb{E}\pi_i({\scriptstyle\frac{v_0 + v_1}{2}}|t_i = v_1)& = P(t_j = v_0|t_i = v_1)\pi_i(t_j = v_0, {\scriptstyle\frac{v_0 + v_1}{2}}, \gamma^*(v_0)|t_i = v_1)\\& + P(t_j = v_1|t_i = v_1)\pi_i(t_j = v_1, {\scriptstyle\frac{v_0 + v_1}{2}}, \gamma^*(v_1)|t_i = v_1) = \frac{1}{2}\frac{v_1 - v_0}{2} + \frac{1}{2}\frac{v_1 - v_0}{4} = \frac{3(v_1 - v_0)}{8}\\
+		\mathbb{E}\pi_i(v_1|t_i = v_1)& = P(t_j = v_0|t_i = v_1)\pi_i(t_j = v_0, v_1, \gamma^*(v_0)|t_i = v_1) + P(t_j = v_1|t_i = v_1)\pi_i(t_j = v_1, v_1, \gamma^*(v_1)|t_i = v_1) = 0
+	\end{split}
+\end{equation}
+Thus, $\gamma^*(v_1) = \frac{v_0 + v_1}{2}$ is also part of the BNE. More precisely, the set of BNE strategy profiles could be defined as $\{(v_0, v_0), (v_0, \frac{v_0 + v_1}{2})\}$.
+
+\subsection*{Exercise 6}
 \end{document}
